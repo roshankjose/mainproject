@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from rest_framework import serializers
+# this is a change
 
 def home(request):
     branches = Branch.objects.all()[:5]
@@ -112,7 +113,7 @@ def forms(request):
     return render(request, 'form.html', {'districts': districts, 'branches': branches})
 
 def get_districts_and_branches(request):
-    
+
     district_id = request.GET.get('district')
     branches = Branch.objects.filter(district=district_id)
 
