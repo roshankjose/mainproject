@@ -68,39 +68,39 @@
 
             
 
-            <form action="#" method="post" class="p-5 bg-white">
-              
-              <h2 class="h4 text-black mb-5">Add your essentienal details</h2> 
-
+            <form action="/forms" method="post" class="p-5 bg-white">
+              {% csrf_token %}
+              <h2 class="h4 text-black mb-5">Add your essential details</h2> 
+         
+              <!-- First Name and Last Name -->
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="first_name">First Name</label>
-                  <input type="text" id="first_name" value="first_name" class="form-control">
+                  <input type="text" id="first_name" name="first_name" placeholder="Enter your First Name" class="form-control" required>
                 </div>
                 <div class="col-md-6">
                   <label class="text-black" for="last_name">Last Name</label>
-                  <input type="text" id="last_name" value="last_name" class="form-control">
+                  <input type="text" id="last_name" name="last_name" placeholder="Enter your Last Name" class="form-control" required>
                 </div>
               </div>
               
+              <!-- Date of Birth and Age -->
               <div class="row form-group">
-                
-                <div class="col-md-12">
-                  <label class="text-black" for=" date_of_birth">Date of Birth</label> 
-                  <input type="date" id=" date_of_birth"  value=" date_of_birth" class="form-control">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="date_of_birth">Date of Birth</label> 
+                  <input type="date" id="date_of_birth" name="date_of_birth" placeholder="Enter your Date of Birth" class="form-control" required>
                 </div>
-              </div>
-              <div class="row form-group">
-                
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <label class="text-black" for="age">Age</label> 
-                  <input type="number" id="age" class="form-control">
+                  <input type="number" id="age" name="age" placeholder="Enter your Age" class="form-control" required>
                 </div>
               </div>
+              
+              <!-- Gender -->
               <div class="row form-group">
                 <div class="col-md-12">
                   <label class="text-black" for="gender">Gender</label>
-                  <select id="gender" value="gender" class="form-control">
+                  <select id="gender" name="gender" class="form-control" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
@@ -108,41 +108,41 @@
                 </div>
               </div>
               
-
+              <!-- Phone Number and Email -->
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="phone_number">Phone Number</label>
-                  <input type="text" id="phone_number" value="phone_number" class="form-control">
+                  <input type="text" id="phone_number" name="phone_number" placeholder="Enter your Phone Number" class="form-control" required>
                 </div>
                 <div class="col-md-6">
                   <label class="text-black" for="email">Email</label>
-                  <input type="email" id="email" value="email" class="form-control">
+                  <input type="email" id="email" name="email" placeholder="Enter your Email" class="form-control" required>
                 </div>
               </div>
-
-
+            
+              <!-- Address -->
               <div class="row form-group">
-                
                 <div class="col-md-12">
                   <label class="text-black" for="address">Address</label> 
-                  <input type="text" id="address" value="address" class="form-control">
+                  <input type="text" id="address" name="address" placeholder="Enter your Address" class="form-control" required>
                 </div>
               </div>
-
+            
+              <!-- District and Branch -->
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
-                    <label class="text-black" for="district">District</label>
-                    <select id="districtDropdown" class="form-control">
-                      {% for district in districts %}
-                      <option value="{{ district.id }}">{{ district.name }}</option>
-                      {% endfor %}
-                    </select>
+                  <label class="text-black" for="districtDropdown">District</label>
+                  <select id="districtDropdown" name="district" class="form-control" required>
+                    {% for district in districts %}
+                    <option value="{{ district.id }}">{{ district.name }}</option>
+                    {% endfor %}
+                  </select>
                 </div>
                 <div class="col-md-6">
-                    <label class="text-black" for="branch">Branch's</label>
-                    <select id="branchDropdown" class="form-control"></select>
+                  <label class="text-black" for="branchDropdown">Branch</label>
+                  <select id="branchDropdown" name="branch" class="form-control" required></select>
                 </div>
-            </div>
+              </div>
             <script>
               // document.addEventListener('DOMContentLoaded', function () {
                 const districtDropdown = document.getElementById('districtDropdown');
@@ -170,54 +170,88 @@
 
             
             </script>
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="Account">Account Type</label>
-                  <select id="account_type" value="account_type" class="form-control">
-                    <option value="Savings Account">Savings Account</option>
-                    <option value="Current Account">Current Account</option>
-                    <option value="Fixed Deposit">Fixed Deposit</option>
-                  </select>
+            <!-- Account Type -->
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label class="text-black" for="account_type">Account Type</label>
+                <select id="account_type" name="account_type" class="form-control" required>
+                  <option value="Savings Account">Savings Account</option>
+                  <option value="Current Account">Current Account</option>
+                  <option value="Fixed Deposit">Fixed Deposit</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Materials Provided -->
+            <div class="row form-group">
+              <div class="col-md-12">
+                <label class="text-black">Materials Provided &nbsp; :&nbsp;</label>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="debitCard" name="materials" value="Debit Card">
+                  <label class="form-check-label" for="debitCard">&nbsp;Debit Card</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="creditCard" name="materials" value="Credit Card">
+                  <label class="form-check-label" for="creditCard">&nbsp;Credit Card</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="checkbox" class="form-check-input" id="chequeBook" name="materials" value="Cheque Book">
+                  <label class="form-check-label" for="chequeBook">&nbsp;Cheque Book</label>
                 </div>
               </div>
-              
+            </div>
 
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black">Materials Provided &nbsp; :&nbsp;</label>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="debitCard" name="materials" value="Debit Card">
-                    <label class="form-check-label" for="debitCard">&nbsp;Debit Card</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="creditCard" name="materials" value="Credit Card">
-                    <label class="form-check-label" for="creditCard">&nbsp;Credit Card</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="chequeBook" name="materials" value="Cheque Book">
-                    <label class="form-check-label" for="chequeBook">&nbsp;Cheque Book</label>
-                  </div>
-                </div>
+            <div class="row form-group">
+              <div class="col-md-12">
+                <input type="submit" id="submitBtn" value="Submit" class="btn btn-primary btn-md text-white">
+                <a href="{% url 'banking_app:logout' %}"><input type="button" value="Logout" class="btn btn-secondary btn-md text-white"></a>
               </div>
-              
-              
-              
-              
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <input type="submit" value="Submit" class="btn btn-primary btn-md text-white">
-                  <a href="{% url 'banking_app:logout' %}"><input type="button" value="Logout" class="btn btn-secondary btn-md text-white"></a>
-                </div>
-              </div>
-
-  
+            </div> 
             </form>
+
           </div>
           
         </div>
       </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var submitBtn = document.getElementById('submitBtn');
+            
+            submitBtn.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent the form from submitting
+    
+                // Validate the form
+                if (isFormValid()) {
+                    // You can replace this code with your actual form submission logic
+                    // Simulate a successful form submission
+                    // In your actual code, this part should be in your view
+                    var userCreated = true; // Replace with your actual condition
+    
+                    if (userCreated) {
+                        // Display a pop-up message
+                        alert('User Created');
+    
+                        // Redirect to the home page or any other appropriate action
+                        window.location.href = "{% url 'banking_app:home' %}";
+                    }
+                } else {
+                    // Form is not valid, display an error message
+                    alert('Please fill out all the required fields.');
+                }
+            });
+    
+            function isFormValid() {
+                // Check if all required fields are filled out
+                var requiredFields = document.querySelectorAll('[required]');
+                for (var i = 0; i < requiredFields.length; i++) {
+                    if (!requiredFields[i].value.trim()) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
+    </script>
     </section>
 
   <!-- registration Form -->

@@ -13,3 +13,4 @@ urlpatterns = [
     path('get_districts_and_branches', views.get_districts_and_branches, name='get_districts_and_branches'),
    
 ]
+  
